@@ -16,6 +16,9 @@ $(document).ready(function() {
         format: 'json'
       },
       success: function(response) {
+        if (response.meta.count === 0) {
+          $('.errors').text("Your search did not return any results");
+        } else
         console.log(response);
         for(let i=0; i < (response.data).length; i++) {
           let doctorFistName = (response.data[i].profile).first_name;
@@ -69,7 +72,6 @@ $(document).ready(function() {
         format: 'json'
       },
       success: function(response) {
-        console.log(response);
         for(let i=0; i < (response.data).length; i++) {
           let doctorFistName = (response.data[i].profile).first_name;
           let doctorLastName = (response.data[i].profile).last_name;
