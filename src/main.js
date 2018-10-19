@@ -9,13 +9,8 @@ $(document).ready(function() {
   $('#doctor').click(function() {
     let healthIssue = $("#healthIssue").val();
 
-    $.ajax({
-      url: `https://api.betterdoctor.com/2016-03-01/doctors?query=${healthIssue}&location=wa-seattle&user_location=37.773%2C-122.413&skip=0&user_key=${process.env.exports.apiKey}`,
-      type: 'GET',
-      data: {
-        format: 'json'
-      },
-      success: function(response) {
+    $.get(`https://api.betterdoctor.com/2016-03-01/doctors?query=${healthIssue}&location=wa-seattle&user_location=37.773%2C-122.413&skip=0&user_key=${process.env.exports.apiKey}`).then(function(response)
+      {
         if (response.meta.count === 0) {
           $('.errors').text("Your search did not return any results");
         } else
@@ -49,13 +44,12 @@ $(document).ready(function() {
                                       Website: ${doctorWebsite}</br>
                                       Accepts new patients? ${acceptsNew}
                                       </div></br></br>`);
+              $('.errors').text("");
             }
           }
         }
-      },
-      error: function() {
-        $('#errors').text("There was an error processing your request. Please try again.");
-      }
+      }).fail(function(error) {
+        $('.errors').text(`There was an error processing your request: ${error.responseText}. Please try again.`);
     });
   });
 
@@ -65,13 +59,8 @@ $(document).ready(function() {
     let DocFirst = $("#docName").val();
     let DocLast = $("#docLast").val();
 
-    $.ajax({
-      url: `https://api.betterdoctor.com/2016-03-01/doctors?first_name=${DocFirst}&last_name=${DocLast}&location=wa-seattle&user_location=37.773%2C-122.413&skip=0&user_key=${process.env.exports.apiKey}`,
-      type: 'GET',
-      data: {
-        format: 'json'
-      },
-      success: function(response) {
+    $.get(`https://api.betterdoctor.com/2016-03-01/doctors?first_name=${DocFirst}&last_name=${DocLast}&location=wa-seattle&user_location=37.773%2C-122.413&skip=0&user_key=${process.env.exports.apiKey}`).then(function(response)
+      {
         for(let i=0; i < (response.data).length; i++) {
           let doctorFistName = (response.data[i].profile).first_name;
           let doctorLastName = (response.data[i].profile).last_name;
@@ -101,14 +90,12 @@ $(document).ready(function() {
                                       Website: ${doctorWebsite}</br>
                                       Accepts new patients? ${acceptsNew}
                                       </div></br></br>`);
+            $('.errors').text("");
             }
           }
         }
-      },
-      error: function() {
-        $('#errors').text("There was an error processing your request. Please try again.");
-      }
+      }).fail(function(error) {
+        $('#errors').text(`There was an error processing your request: ${error.responseText} Please try again.`);
+      });
     });
   });
-
-});
