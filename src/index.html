@@ -9,23 +9,20 @@
       <h1>Find a doctor based on a health issue</h1>
       <label for="healthIssue">Enter a health issue</label>
       <input id="healthIssue" type="text">
-      <button class="btn-success" id="doctor">Find Doctors</button>
+      <button class="btn-success" id="doctor">Find Doctors to help you</button>
+
+      <h1>Find a doctor by name</h1>
+      <form id="findbyname">
+      <label for="docName">Enter Doctor's fist name</label>
+      <input id="docName" type="text">
+      <label for="docLast">Enter Doctor's last name</label>
+      <input id="docLast" type="text">
+      <button class="btn-success" id="doctorFind">Find your Doctor</button>
+      </form>
+
       <div class="errors"></div>
-
-<!-- RESULTS -->
-
-          <div id="showResults">
-
-
-          </div>
-
-
-
-
-
-      <!-- <div class="showCharacter"></div> -->
-      <div class="charImg"></div>
-
+      <div id="showResults"></div>
+      <div id="showDoctors"></div>
     </div>
   </body>
 </html>
