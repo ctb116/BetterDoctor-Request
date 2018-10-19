@@ -20,9 +20,19 @@ $(document).ready(function() {
         for(let i=0; i < (response.data).length; i++) {
           let doctorFistName = (response.data[i].profile).first_name;
           let doctorLastName = (response.data[i].profile).last_name;
-          console.log(doctorFistName);
-          $('#showResults').append(`${doctorFistName} ${doctorLastName}`);
-          console.log(response.data[i].profile);
+
+          $('#showResults').append(`<div class="panel panel-default">${doctorFistName} ${doctorLastName}</br>`)
+
+          for(let a=0; a < ((response.data[i]).practices).length; a++) {
+            let doctorLocationName = ((response.data[i]).practices[a]).name;
+            let doctorAddress = ((response.data[i]).practices[a]).visit_address;
+            let doctorCity = doctorAddress.city;
+            let doctorState = doctorAddress.state_long;
+            let doctorStreet = doctorAddress.street;
+            let doctorZip = doctorAddress.zip;
+
+            $('#showResults').append(`${doctorLocationName}<br> Address: ${doctorStreet}<br>${doctorCity}, ${doctorState} ${doctorZip}</div></br></br>`);
+          }
         }
       },
       error: function() {
