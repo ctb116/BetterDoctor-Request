@@ -3,6 +3,7 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 
+
 $(document).ready(function() {
 
   $('#doctor').click(function() {
@@ -10,7 +11,7 @@ $(document).ready(function() {
     console.log(healthIssue);
 
     $.ajax({
-      url: `https://api.betterdoctor.com/2016-03-01/doctors?query=${healthIssue}&location=wa-seattle&user_location=37.773%2C-122.413&skip=0&user_key=4773972df8c668e0d05ee58b36ec5d5b`,
+      url: `https://api.betterdoctor.com/2016-03-01/doctors?query=${healthIssue}&location=wa-seattle&user_location=37.773%2C-122.413&skip=0&user_key=${process.env.exports.apiKey}`,
       type: 'GET',
       data: {
         format: 'json'
